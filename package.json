@@ -19,5 +19,8 @@
     "url": "https://github.com/mini-aron/MURI-SERVER/issues"
   },
   "homepage": "https://github.com/mini-aron/MURI-SERVER#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
