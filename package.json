@@ -1,0 +1,23 @@
+{
+  "name": "muri-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mini-aron/MURI-SERVER.git"
+  },
+  "keywords": [
+    "rudeness",
+    "reader"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mini-aron/MURI-SERVER/issues"
+  },
+  "homepage": "https://github.com/mini-aron/MURI-SERVER#readme",
+  "description": ""
+}
