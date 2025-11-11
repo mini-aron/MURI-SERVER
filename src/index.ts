@@ -1,14 +1,15 @@
 import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
+import apiRouter from './routes'
 
 dotenv.config();
 
 const app = express();
 const port = process.env.SERVER_PORT || 3000;
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, Express + TypeScript + Node.js!');
-});
+app.use(express.json());
+app.use('/api', apiRouter);
+
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
