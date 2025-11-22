@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import dotenv from 'dotenv';
 import apiRouter from './routes'
 
@@ -8,7 +8,7 @@ const app = express();
 const port = process.env.SERVER_PORT || 3000;
 
 app.use(express.json());
-app.use('/api', apiRouter);
+app.use('/', apiRouter);
 
 
 app.listen(port, () => {
