@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import { Knex } from 'knex';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
-
+import { executeQuery } from './dbService';
 
 dotenv.config();
 
@@ -23,26 +23,25 @@ export const generateAccessToken = ({ id, name }: { id: string, name: string }) 
 }
 
 export const registerUser = async (knex: Knex, userName: string, password: string, profileImg?: string) => {
-    console.log(`[registerUser] 시작: userName=${userName} password=${password}`);
     const duplicate = await knex('user').where({ userName }).count('userId as count');
-    console.log(`[registerUser] 중복 검사 결과: ${duplicate[0].count}`);
     if (Number(duplicate[0].count) > 0) {
-        console.error(`[registerUser] 실패: 이미 존재하는 사용자명`);
         throw new Error('이미 존재하는 사용자명입니다.');
     }
+
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    const userId = crypto.randomUUID();
-
-    await knex('user').insert({
-        userId,
-        userName,
-        password: hashedPassword,
-        profileImg: profileImg || null
-    });
-    console.log(`[registerUser] 성공: userId=${userId}`);
+    
+    await executeQuery(() =>
+        knex('user').insert({
+            userName,
+            password: hashedPassword,
+            profileImg: profileImg || null
+        })
+    );
+ 
     return { success: true };
 };
+
 
 
 export const loginUser = async (knex: Knex, userName: string, password: string) => {
